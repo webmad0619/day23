@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router();
 const Character = require("../models/Character")
 
-/* GET home page */
+router.get('/json-server-learning-unit', (req, res, next) => {
+  res.render('JSONServer');
+});
+
+
 router.get('/getRandomNumbers', (req, res, next) => {
   res.render('getRandomNumbersView');
 });
