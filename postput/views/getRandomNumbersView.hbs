@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #randomNumbersPlaceholder {
+      color: red; 
+      font-size: 24px;
+    }
+  </style>
+  
+</head>
+<body>
+  <aside class="controls">
+    <input type="range" min="2" max="1000" value="50" id="nRandomNumbers"><span id="rangeValue"></span>
+    <button id="getRandomNumbersButton">Click me to get random numbers</button>
+  </aside>
+  <ul id="randomNumbersPlaceholder"></ul>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+  <script>
+    const rangeValueDOMEl = document.querySelector("#rangeValue")
+    const nRandomNumbersDOMEl = document.querySelector("#nRandomNumbers")
+    
+    rangeValueDOMEl.innerHTML = nRandomNumbersDOMEl.value
+    nRandomNumbersDOMEl.oninput = function () {
+      rangeValueDOMEl.innerHTML = nRandomNumbersDOMEl.value
+    }
+    document.querySelector("#getRandomNumbersButton").onclick = function () {
+      axios
+        .get(`http://localhost:3000/gabri/${nRandomNumbersDOMEl.value}`)
+        .then(receivedRandomNumbersPayload => {
+          const randomNumbersPlaceholderDOMEl = document.querySelector("#randomNumbersPlaceholder")
+
+            {{!-- receivedRandomNumbersPayload.data.toString() --}}
+
+            receivedRandomNumbersPayload.data.forEach(randomNumber => {
+              const liDOMEl = document.createElement("li")
+              liDOMEl.innerHTML = randomNumber
+              randomNumbersPlaceholderDOMEl.appendChild(liDOMEl)
+            })
+        })
+    }
+  </script>
+</body>
+</html>
