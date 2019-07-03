@@ -21,6 +21,16 @@ router.get("/allCharacters", (req, res) => {
     .then(allCharacters => res.json(allCharacters))
 })
 
+router.put("/updateCharacter", (req, res) => {
+  Character
+    .findByIdAndUpdate(req.body.id, req.body)
+    .then(allCharacters => {
+      Character
+        .find()
+        .then(allCharacters => res.json(allCharacters))
+    })
+})
+
 router.post("/charactersGenerator", (req, res) => {
   Character
     .create(req.body)
