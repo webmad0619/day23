@@ -1,5 +1,6 @@
 let allCharacters = []
 
+// this function leaves all the form fields with blank values
 function resetFormFields() {
   document.querySelector("aside form input[name=name]").value = ""
   document.querySelector("aside form input[name=occupation]").value = ""
@@ -8,6 +9,8 @@ function resetFormFields() {
   document.querySelector("aside form input[name=id]").value = ""
 }
 
+
+// edits a characters based on their index in the 
 function edit(idx) {
   const chosenCharacter = allCharacters[idx]
 
@@ -40,7 +43,6 @@ function edit(idx) {
 
         resetFormFields()
       })
-
   }
 }
 
@@ -65,11 +67,6 @@ axios
 
 document.querySelector("#addNewCharacter").onclick = function (e) {
   e.preventDefault()
-
-  // <input type="text" name="name" placeholder="name">
-  // <input type="text" name="occupation" placeholder="occupation">
-  // <input type="text" name="weapon" placeholder="weapon">
-  // <input type="text" name="debt" placeholder="debt">
 
   const newCharacterJSONPayload = {
     name: document.querySelector("aside form input[name=name]").value,
